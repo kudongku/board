@@ -11,3 +11,5 @@ docker pull mysql
 ```bash
 docker compose up -d  
 ```
+
+<img width="363" alt="image" src="https://github.com/user-attachments/assets/1fa577aa-aec1-40c6-a836-80c75cd4b26d">
