@@ -1,18 +1,15 @@
 ## kubernetes
 
+> 해당 레포지토리는 board front와 back의 상위 디렉토리로, board service의 kubernetes를 총괄하고 mysql 컨테이너를 관리하기 위함입니다.
+
 ### workflow
-#### 최초 실행시
 - 최초실행시 install 후 cluster를 생성해준다.
-- docker image를 빌드한 후, dockerhub에 push해준다.
-- deployment.yaml를 사용해 deploy해주고, port-forward를 통해 로컬에서 테스트를 진행한다.
-#### 업데이트 사항 반영시
-- 백엔드의 경우에는 bootjar를 통해 새로운 jar파일을 만들어준다.
 - docker image를 빌드한 후, dockerhub에 push해준다.
 - deployment.yaml를 사용해 deploy해주고, port-forward를 통해 로컬에서 테스트를 진행한다.
 
 ---
 
-### kind, kubectl install (한번만 해주면 된다.)
+### kind, kubectl install
 > https://kind.sigs.k8s.io/
 
 ```bash
@@ -37,35 +34,12 @@ docker tag mysql:8 kudongku/mysql:8
 docker push kudongku/mysql:8
 ```
 
-- spring backend
-```bash
-docker build -t kudongku/board-back-image .
-docker push kudongku/board-back-image:latest
-```
 
-- next.js frontend
-```bash
-docker build -t kudongku/board-front-image .
-docker push kudongku/board-front-image:latest
-```
-
-### deployment (image 빌드 후 push 되었을 때 사용한다.)
+### deployment
 - mysql
 ```bash
 kubectl apply -f mysql_deployment.yaml
 kubectl port-forward service/mysql-service 3307:3306
-```
-
-- spring backend
-```bash
-kubectl apply -f back_deployment.yaml
-kubectl port-forward service/board-service 8080:8080
-```
-
-- next.js frontend
-```bash
-kubectl apply -f front_deployment.yaml
-kubectl port-forward service/board-front-service 3000:3000
 ```
 
 ---
